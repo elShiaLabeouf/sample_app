@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'bootstrap-sass', '~> 3.3.6'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -37,6 +37,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~>3.6.1'
+  gem 'guard-rspec', '~>4.7.3'
+
 end
 
 group :development do
