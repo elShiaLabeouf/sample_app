@@ -19,11 +19,20 @@ RSpec.describe "UserPages", type: :request do
 	  		fill_in "Name", with: "Example User"
 	  		fill_in "Email", with: "user@example.org"
 	  		fill_in "Password", with: "foobar"
-	  		fill_in "Confirm Password", with: "foobar"
+	  		fill_in "Confirm password", with: "foobar"
 	  	end
 	  	it "should create a user" do
   			expect { click_button submit }.to change(User, :count).by(1)
   		end
+
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: "user@example.org") }
+
+        it { should have_link('Sign out') }
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+      end
   	end
   end
 
