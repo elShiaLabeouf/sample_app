@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, only: [:index, :edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :signed_in_user, only: %i[index edit update]
+  before_action :correct_user, only: %i[edit update]
   before_action :admin_user, only: [:destroy]
-  before_action :set_user, only: [:edit, :update, :edit, :show]
+  before_action :set_user, only: %i[edit update edit show]
 
   def new
-  	@user = User.new
+    @user = User.new
   end
 
   def index
@@ -23,17 +23,16 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.destroy
-      flash[:success] = "User deleted."
+      flash[:success] = 'User deleted.'
       redirect_to users_url
     end
-  end  
-
-  def edit
   end
+
+  def edit; end
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit'
@@ -41,14 +40,14 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(user_params)
-  	if @user.save
-  		sign_in @user
-  		flash[:success] = "Welcome to the Sample App!"
-  		redirect_to @user
-  	else
-  		render 'new'
-  	end
+    @user = User.new(user_params)
+    if @user.save
+      sign_in @user
+      flash[:success] = 'Welcome to the Sample App!'
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
   private
@@ -62,12 +61,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  	params.require(:user).permit(:name, :email, :password, 
-  															 :password_confirmation)
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
   end
 
   def signed_in_user
-    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    redirect_to signin_url, notice: 'Please sign in.' unless signed_in?
   end
 
   def correct_user
@@ -78,6 +77,5 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
-
 
 end

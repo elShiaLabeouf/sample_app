@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-	resources :users do
-    post '/microposts' => 'users#micropost_create'
-  end
-
-	resources :sessions, only: [:new, :create, :destroy]	
+	resources :users
+	resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
   
   get '/help' => 'static_pages#help'
   get '/about' => 'static_pages#about'
