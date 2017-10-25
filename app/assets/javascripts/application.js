@@ -10,9 +10,23 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
+
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require rails-ujs
+// require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+
+function text_length() {
+    var text = document.getElementById('text');
+    var color = '#A9A9A9';
+    var content = text.value;
+    var contentwithoutspaces = content.replace(/\s+/g, '');
+    var length = contentwithoutspaces.length;
+    var textlength = document.getElementById('textlength');
+    if (length > 140) color = '#ba5757';
+    textlength.innerHTML = (length + '/140').fontcolor(color);
+}
